@@ -30,4 +30,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app:
+    name: "DocsBox"
+    company: "Matrix APA"
+  uploader:
+    msg:
+      default: "Click or drag and drop here to upload a file"
+  search:
+    placeholder: "Click here and type to start searching"

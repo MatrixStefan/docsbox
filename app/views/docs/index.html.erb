@@ -1,0 +1,5 @@
+<ul>
+  <% @docs.each do |doc| %>
+    <li><%= render partial: 'docs/doc_list_item', locals: {doc: doc} %></li>
+  <% end %>
+</ul>

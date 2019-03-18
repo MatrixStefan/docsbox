@@ -1,0 +1,48 @@
+<div id="active-storage-container">
+  <% if model.attachment.attached? %>
+    <div class="flex-col asdownloadlinkcontainer">
+      <div class="flex-row">
+
+        <%= link_to model.attachment, target: "_blank", class: 'asdownloadlink' do %>
+          <div class="flex-col flex-left">
+            <div class="flex-row">
+              <div class="flex-col flex-left">
+                <% filename = model.attachment.blob.filename.to_s %>
+                <%= "#{filename.truncate(50, omission: "~#{filename.last(5)}")}" %>
+              </div>
+              <div class="flex-col">
+                <div class="flex-row flex-right">
+                  <%= "#{'%.2f' % ((model.attachment.blob.byte_size).to_f / 1000000)} MB" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <%= link_to delete_attachment_path(:id => model, :attachment => model.attachment.id), class: 'action-link delete-x-box', input_html: {style: 'padding-left: 4px;'}, data: {confirm: "Are you sure you want to <strong>delete</strong> this file?<br />#{model.attachment.blob.filename}", afirm: "Yes, I'm sure", cancel: "No, go back"} do %>
+          <div class="flex-col flex-right delete-x">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        <% end %>
+      </div>
+      <div class="flex-row file-uploaded-timestamp">
+        <h6>Uploaded <%= time_ago_in_words(model.attachment.blob.created_at) %> ago</h6>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="flex-row" id="as-upload-box">
+      <%= f.drag_and_drop_file_field :attachment do %>
+        <i class="fa fa-upload fa-4x" aria-hidden="true" id="iconContainer"></i><br/>
+        <%= uploader_msg %>
+      <% end %>
+      <div id="error-message">
+
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>
